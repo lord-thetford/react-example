@@ -22,8 +22,19 @@ export function ImageRow(props: ImageType) {
 export default function ImageTable() {
   async function allImages() {
     const res = await fetch("https://fakerapi.it/api/v1/images?_width=380");
+
+    if (!res.ok) {
+      throw new Error(`Request failed with status "${res.status}"`);
+      // TODO: Display an error page instead?
+    }
+
     const images = await res.json().then((_) => _);
     
+    if (images.code != 200) {
+      throw new Error("Faker API says something went wrong on their end");
+      // TODO: Display an error page instead?
+    }
+
     return images.data.map((image: ImageType, index: number) => {
       return <ImageRow key={index} seed={index} url={image.url} title={image.title} description={image.description} />;
     });

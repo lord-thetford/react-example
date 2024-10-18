@@ -2,7 +2,7 @@ import { Image as ImageType } from "./../models/Image";
 import Image from "next/image";
 
 // One row of an ImageTable component
-export function ImageRow(props: ImageType) {
+function ImageRow(props: ImageType) {
   return (
     <tr className="border-b">
       <td className="p-4">
